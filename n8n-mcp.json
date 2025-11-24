@@ -1,0 +1,470 @@
+{
+    "nodes": [
+      {
+        "parameters": {
+          "mode": "insert",
+          "tableName": {
+            "__rl": true,
+            "value": "documents",
+            "mode": "list",
+            "cachedResultName": "documents"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "typeVersion": 1.3,
+        "position": [
+          1696,
+          432
+        ],
+        "id": "e15caca7-e5f4-45a0-949a-feab4499fcc0",
+        "name": "Supabase Vector Store",
+        "credentials": {
+          "supabaseApi": {
+            "id": "t79DatAVSw3Olrju",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "textSplittingMode": "custom",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+        "typeVersion": 1.1,
+        "position": [
+          1808,
+          624
+        ],
+        "id": "a0b3174c-e839-426c-9f77-5355767de8aa",
+        "name": "Default Data Loader"
+      },
+      {
+        "parameters": {
+          "chunkOverlap": 200,
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "typeVersion": 1,
+        "position": [
+          1888,
+          752
+        ],
+        "id": "692daeaa-5761-4a42-80f5-c34af27a2bea",
+        "name": "Recursive Character Text Splitter"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+        "typeVersion": 1,
+        "position": [
+          1680,
+          608
+        ],
+        "id": "17faa43f-9644-4fb9-8dd8-b6b33047f75e",
+        "name": "Embeddings Cohere",
+        "credentials": {
+          "cohereApi": {
+            "id": "RS2YeFmJye8Ap5SR",
+            "name": "CohereApi account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "121bb4f5-4b5b-403f-8147-b2ec24ec232b",
+                "name": "Knowledge",
+                "value": "=Topic: About Doolally  \nQuestion: What is Doolally?  \nAnswer: Doolally is a scrappy little restaurant and craft beer company, founded in 2009. They operate taprooms in Mumbai and Pune, offering craft beers, ciders, meads, all-day dining, board games, pet-friendly spaces, and a vibrant community of events.  Topic: About Doolally.\nQuestion: Where is Doolally located?  \nAnswer: Doolally has taprooms in Mumbai and Pune. In Mumbai, you’ll find them in Andheri, Khar, and Thane. In Pune, they are located in Koregaon Park.  \nTopic: About Doolally  \nQuestion: Is Doolally pet-friendly?  \nAnswer: Yes! All Doolally taprooms are pet-friendly, so you can bring your furry friends along.  \nTopic: About Doolally  Question: What does the name “Doolally” mean?  \nAnswer: “Doolally” means crazy or eccentric. The term comes from Deolali, a town in Nashik where British soldiers stationed in the 1800s often went a bit mad due to boredom and heat — giving rise to the phrase “going Doolally.”  \nTopic: About Doolally  \nQuestion: Who founded Doolally?  \nAnswer: Doolally was co-founded by a German brewmaster and a detergent powder salesman.  \nTopic: About Doolally  \nQuestion: What is Doolally’s legal name?  \nAnswer: The company is legally registered as Brewcrafts Microbrewing Pvt Ltd.  \nTopic: Contact Information  \nQuestion: What are Doolally’s contact numbers?  \nAnswer: You can reach Doolally at +91 96531 88646 or +91 91678 60273.  Topic: Contact Information  Question: What is Doolally’s official address?  Answer: C18, Dream Works, Off New Link Road, Dalia Estate, Andheri West, Greater Mumbai Ward K/W, Maharashtra 400053.\n\nTopic: Merchandise\n\nQuestion: What is the Mug Club Membership?\n\nAnswer: A one-year membership priced at ₹3000. Members get a personalized mug, 50% more beer at taprooms, 25% more beer in growlers, plus secret goodies.\n\nTopic: Merchandise\n\nQuestion: What Doolally merchandise is available?\n\nAnswer: Pint and goblet glass sets, umbrellas, calendars, and coasters. Prices range from ₹250 to ₹1500.\n\nTopic: Events\n\nQuestion: What is the Doolally Pub Quiz?\n\nAnswer: A weekly trivia quiz held every Wednesday at 8:30 pm across all taprooms. It’s free to enter and comes with beery prizes.\n\nTopic: Events\n\nQuestion: Does Doolally host workshops?\n\nAnswer: Yes! Doolally hosts creative workshops like handblock printing, mosaic painting, mug art, and more at different taprooms. Prices vary between ₹1299–₹1650.\n\nTopic: Events\n\nQuestion: What is the Doolally Twitter Quiz?\n\nAnswer: An online quiz hosted on Twitter every Friday at 2 pm. It’s free to join — just follow @godoolally.\n\nTopic: Events\n\nQuestion: Is there a chess meetup at Doolally?\n\nAnswer: Yes. Doolally Pune hosts free chess meetups open to all ages (below 21 must be accompanied by a parent).\n\nBreakfast\n\nQ: What comes in the American Breakfast at Doolally?\nA: The American Breakfast includes eggs to order, crispy bacon, sausage, potato rösti, and fluffy pancakes with maple syrup. Price: ₹500.\n\nQ: What is included in the Vegetarian Breakfast?\nA: The Veg Breakfast comes with eggs to order, sautéed mushrooms, potato rösti, grilled tomatoes, baked beans, and pancakes with maple syrup. Price: ₹450.\n\nQ: What is Kheema Ghotala?\nA: It’s spiced minced meat cooked with scrambled eggs, served with bread. Price: ₹550.\n\nQ: What is the Chorizo Akuri?\nA: Spicy Goan chorizo cooked with scrambled eggs, served with bread. Price: ₹500.\n\nQ: What is served in the Doolally Special Porridge?\nA: Warm porridge cooked with oats, milk, cinnamon, and honey, served with fresh fruits. Price: ₹300.\n\nQ: What pancakes are available?\nA: Fluffy pancakes with maple syrup. Price: ₹300.\n\nEggs to Order\n\nQ: What are the options for eggs at Doolally?\nA: Eggs can be ordered as Scrambled, Fried, Omelette, or Boiled. Price: ₹200.\n\nSalads\n\nQ: What is in the Watermelon Feta Salad?\nA: Fresh watermelon, feta cheese, olives, and mint. Price: ₹350.\n\nQ: Is there a Jain version of the Watermelon Feta Salad?\nA: Yes, a Jain-friendly version is available. Price: ₹350.\n\nQ: What is in the Caesar Salad?\nA: Romaine lettuce, parmesan, croutons, and Caesar dressing. Price: ₹350.\n\nStarters\n\nQ: What is Kerala Pepper Prawns?\nA: Prawns tossed in a fiery black pepper masala. Price: ₹650.\n\nQ: What is Fish Fry 65?\nA: South Indian–style deep-fried fish spiced with curry leaves and red chili. Price: ₹650.\n\nQ: What is Prawn Koliwada?\nA: Mumbai’s classic fried prawn starter with a tangy masala. Price: ₹650.\n\nQ: What is Buldak Fire Chicken?\nA: Korean-style spicy chicken tossed in Gochujang sauce with peppers, topped with cheddar cheese. Price: ₹450.\n\nQ: What are Onion Rings at Doolally?\nA: Deep-fried onion rings with dipping sauce. Price: ₹300.\n\nQ: What is the Peri-Peri Fries?\nA: Crispy fries tossed in peri-peri seasoning. Price: ₹250.\n\nQ: What is the Beer-Battered Onion Pakoda?\nA: Onion fritters in beer batter, deep fried until golden. Price: ₹300.\n\nQ: What is the Chili Cheese Toast?\nA: Toasted bread topped with cheese, green chilies, and seasoning. Price: ₹300.\n\n\nMain Course\n\nQ: What is the Goan Prawns Curry served with?\nA: It comes with steamed rice and prawn crackers. Price: ₹650.\n\nQ: What is the Mangalorean Chicken Ghee Roast?\nA: Chicken cooked in spicy red chili ghee masala, served with onion rice and kori roti. Price: ₹550.\n\nQ: What is the Burmese Khaw Swe?\nA: A Burmese coconut curry noodle bowl with vegetables or chicken. Price: Veg ₹450, Chicken ₹500.\n\nQ: What is Kung Pao Soya Chaap?\nA: Soya chaap tossed in Kung Pao sauce with peppers, served with rice. Price: ₹500.\n\nQ: What is Vegetable Ishtew?\nA: A Kerala-style coconut milk vegetable stew served with appam. Available in regular and Jain options. Price: ₹450.\n\nQ: What is the Grilled Harissa Cottage Cheese Steak?\nA: Grilled paneer marinated with harissa, served with vegetables and mashed potatoes. Price: ₹500.\n\nQ: What is Kung Pao Chicken?\nA: Stir-fried chicken in Kung Pao sauce with bell peppers and peanuts, served with rice. Price: ₹550.\n\n\n\nPizza\n\nQ: What pizzas are available at Doolally?\nA: Options include:\n\nPepperoni Pizza – ₹650\n\nPesto Chicken Pizza – ₹600\n\nBBQ Chicken Pizza – ₹600\n\nFour Cheese Pizza – ₹600\n\nVeggie Pizza – ₹500\n\nBianco Pizza – ₹550\n\n\nDesserts\n\nQ: What is the Baked Chocolate Cheesecake?\nA: A creamy baked cheesecake with chocolate flavor. Price: ₹400.\n\nQ: Does Doolally have Apple Pie?\nA: Yes, served warm, with regular and Jain versions available. Price: ₹350.\n\n\n\nDrinks\n\nQ: What beers and ciders are available at Doolally?\nA: Options include Neipa, Blueberry Cider, Belgian Wit, Apple Cider, Amber Lager, Alphonso Mead, Guava Mead, Hefeweizen, Helles Lager, Rauchbier, Coffee Orange Mead, Pomegranate Mead, and Raspberry Wit. Prices start from ₹550 per litre.\n\nQ: What does the Blueberry Cider taste like?\nA: It’s described as “a fat stack of blueberry pancakes in a glass.” Price: ₹550/litre.\n\nQ: Which beer is hazy and fruity?\nA: The Neipa is a hazy, fruity, and juicy New England IPA. Price: ₹600/litre.\n\nQ: What is the Apple Cider like?\nA: A crisp, refreshing cider made from apples. Price: ₹550/litre.\n\nQ: What is the Alphonso Mead?\nA: A sweet honey wine infused with Alphonso mangoes. Price: ₹600/litre.\n\nQ: What is the Guava Mead?\nA: Mead infused with guava flavors, slightly sweet and refreshing. Price: ₹600/litre.\n\n",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1408,
+          432
+        ],
+        "id": "86f3fd50-b8a5-4751-81b3-2f16bdd70911",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          1120,
+          432
+        ],
+        "id": "f570a990-6646-492e-8523-522de22473e5",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "content": "## Manual Data Injection\n",
+          "height": 800,
+          "width": 1152,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1008,
+          256
+        ],
+        "typeVersion": 1,
+        "id": "f4e72824-b395-4089-8b19-4a404dbe4176",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "path": "7e41d2c8-3164-4922-a8bd-a9a1b974ce6d"
+        },
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "typeVersion": 2,
+        "position": [
+          -96,
+          112
+        ],
+        "id": "2db4720a-251e-4519-a063-945019b6824f",
+        "name": "MCP Server Trigger",
+        "webhookId": "7e41d2c8-3164-4922-a8bd-a9a1b974ce6d"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+        "typeVersion": 1,
+        "position": [
+          144,
+          608
+        ],
+        "id": "b4f59374-2030-406d-af98-2dd655c74f74",
+        "name": "Embeddings Cohere1",
+        "credentials": {
+          "cohereApi": {
+            "id": "RS2YeFmJye8Ap5SR",
+            "name": "CohereApi account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "retrieve-as-tool",
+          "toolDescription": "This tool provides structured Q&A knowledge about Doolally (taprooms, timings, menu items, pricing, events, and policies). It retrieves data stored in a Supabase vector table and returns the most relevant answers to user queries. The tool is designed for integration with an AI voice agent so that callers can ask questions about Doolally’s menu, drinks, timings, events, or general info, and receive accurate responses.",
+          "tableName": {
+            "__rl": true,
+            "value": "documents",
+            "mode": "list",
+            "cachedResultName": "documents"
+          },
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+        "typeVersion": 1.3,
+        "position": [
+          80,
+          400
+        ],
+        "id": "a87fda5d-a943-4018-95b5-03a6742be74a",
+        "name": "doolally_knowledge_base",
+        "credentials": {
+          "supabaseApi": {
+            "id": "t79DatAVSw3Olrju",
+            "name": "Supabase account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Record a confirmed order in the Google Sheets Orders tab after stock and pricing have been validated. Use this tool only after confirming item availability with check_menu_stock.",
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48",
+            "mode": "list",
+            "cachedResultName": "Doolally",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 704759397,
+            "mode": "list",
+            "cachedResultName": "Order",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48/edit#gid=704759397"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Order ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Order_ID', ``, 'string') }}",
+              "Timestamp": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Timestamp', ``, 'string') }}",
+              "Customer Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Customer_Name', ``, 'string') }}",
+              "Customer Phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Customer_Phone', ``, 'string') }}",
+              "Item ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Item_ID', ``, 'string') }}",
+              "Item Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Item_Name', ``, 'string') }}",
+              "Quantity": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Quantity', ``, 'string') }}",
+              "Price per Item": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Price_per_Item', ``, 'string') }}",
+              "Total Price": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Total_Price', ``, 'string') }}",
+              "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Order ID",
+                "displayName": "Order ID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Timestamp",
+                "displayName": "Timestamp",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Customer Name",
+                "displayName": "Customer Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Customer Phone",
+                "displayName": "Customer Phone",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Item ID",
+                "displayName": "Item ID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Item Name",
+                "displayName": "Item Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Quantity",
+                "displayName": "Quantity",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Price per Item",
+                "displayName": "Price per Item",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Total Price",
+                "displayName": "Total Price",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Status",
+                "displayName": "Status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          -48,
+          352
+        ],
+        "id": "85325b30-eec4-4595-bc61-b5f06995cff6",
+        "name": "place_order",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "11OjSg09qB8uCg92",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Validate the availability and current price of an item from the Google Sheets Menu tab before confirming an order. Use this tool when a caller requests to place an order or asks if an item is in stock. It ensures the agent only confirms items that are available.",
+          "documentId": {
+            "__rl": true,
+            "value": "1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48",
+            "mode": "list",
+            "cachedResultName": "Doolally",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Menu",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eOYbw4JnH3f6r2ZVdmKkmboTv4inEyx4z_bx6CQqE48/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          -192,
+          352
+        ],
+        "id": "18f58968-cb67-4cfb-be79-a3adaf9b00c5",
+        "name": "check_menu_stock",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "11OjSg09qB8uCg92",
+            "name": "Google Sheets account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Default Data Loader": {
+        "ai_document": [
+          [
+            {
+              "node": "Supabase Vector Store",
+              "type": "ai_document",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Recursive Character Text Splitter": {
+        "ai_textSplitter": [
+          [
+            {
+              "node": "Default Data Loader",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings Cohere": {
+        "ai_embedding": [
+          [
+            {
+              "node": "Supabase Vector Store",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Supabase Vector Store",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Embeddings Cohere1": {
+        "ai_embedding": [
+          [
+            {
+              "node": "doolally_knowledge_base",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "doolally_knowledge_base": {
+        "ai_tool": [
+          [
+            {
+              "node": "MCP Server Trigger",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "place_order": {
+        "ai_tool": [
+          [
+            {
+              "node": "MCP Server Trigger",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "check_menu_stock": {
+        "ai_tool": [
+          [
+            {
+              "node": "MCP Server Trigger",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "pinData": {},
+    "meta": {
+      "templateCredsSetupCompleted": true,
+      "instanceId": "f678f7ed017be2629c2251221b3726c51cab30fc55ac1e41cdffad8a6c57829d"
+    }
+  }
