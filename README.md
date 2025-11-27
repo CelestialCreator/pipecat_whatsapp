@@ -37,7 +37,7 @@ The application follows a modular architecture:
 
 - **Server Layer**: FastAPI application that handles WhatsApp webhook events and manages WebRTC connections
 - **Transport Layer**: SmallWebRTCTransport handles WebRTC connection establishment and management
-- **AI Layer**: Uses OpenAI-compatible LLM or MCP service for conversation processing
+- **AI Layer**: Uses OpenAI-compatible LLM for conversation processing and MCP for tool integration
 - **Audio Processing**: Uses Deepgram STT, Cartesia TTS, and Silero VAD for voice activity detection
 
 ### Components
@@ -148,11 +148,9 @@ Set up your webhook endpoint in the Meta Developer Console[[3]](https://develope
 
 ### Optional: MCP (Model Context Protocol) Integration
 
-To use MCP for LLM services instead of OpenRouter:
+To use MCP for extended tool access:
 
-- **MCP HTTP URL**: Optional. Provide an HTTP URL for your MCP server. If provided, the bot will use MCP for LLM services instead of OpenRouter. The `MCP_HTTP_URL` environment variable should be set to your MCP server URL.
-
-> Note: If `MCP_HTTP_URL` is provided, it will take precedence over the OpenRouter configuration.
+- **MCP HTTP URL**: Optional. Provide an HTTP URL for your MCP server. The `MCP_HTTP_URL` environment variable should be set to your MCP server URL.
 
 ## Running the Server
 
@@ -204,21 +202,18 @@ Handles incoming WhatsApp webhook events.
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `OPENROUTER_API_KEY` | Yes* | API key for OpenRouter (unless MCP_HTTP_URL is used) |
+| `OPENROUTER_API_KEY` | Yes | API key for OpenRouter |
 | `DEEPGRAM_API_KEY` | Yes | API key for Deepgram STT service |
 | `CARTESIA_API_KEY` | Yes | API key for Cartesia TTS service |
 | `WHATSAPP_TOKEN` | Yes | WhatsApp Business API access token |
 | `WHATSAPP_WEBHOOK_VERIFICATION_TOKEN` | Yes | Token for webhook verification |
 | `WHATSAPP_PHONE_NUMBER_ID` | Yes | WhatsApp Business phone number ID |
-| `MCP_HTTP_URL` | No | Optional HTTP URL for MCP server (takes precedence over OpenRouter) |
-
-> \* OpenRouter is required unless MCP_HTTP_URL is provided
+| `MCP_HTTP_URL` | No | Optional HTTP URL for MCP server to add tools to the AI agent |
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Webhook Verification Fails**
    - Verify the `WHATSAPP_WEBHOOK_VERIFICATION_TOKEN` matches the one in Meta Developer Console
    - Ensure your webhook URL is publicly accessible (consider using ngrok for local development)
 
@@ -248,7 +243,7 @@ This will enable TRACE-level logging which helps identify issues with the connec
 
 ## MCP Integration
 
-This bot supports MCP (Model Context Protocol) for extended tool access. If the `MCP_HTTP_URL` environment variable is set, the bot will use MCP instead of OpenRouter for LLM services.
+This bot supports MCP (Model Context Protocol) for extended tool access. If the `MCP_HTTP_URL` environment variable is set, the bot will use the MCP server to access custom tools.
 
 MCP allows the bot to access custom tools and services that extend its capabilities. The current implementation includes:
 
@@ -290,11 +285,9 @@ This project uses the Pipecat framework for building real-time voice agents. The
 
 - Input transport (WebRTC connection)
 - STT (Speech-to-Text)
-- LLM context aggregator (user messages)
 - LLM (Large Language Model)
 - TTS (Text-to-Speech)
 - Output transport (WebRTC connection)
-- LLM context aggregator (assistant messages)
 
 ## Documentation References
 
